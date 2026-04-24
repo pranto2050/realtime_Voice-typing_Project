@@ -41,11 +41,7 @@ class VoiceEngine:
 
             try:
                 with self.microphone as source:
-                    self.send_data({"type": "audio_level", "level": 0.5})
-                    
                     audio = self.recognizer.listen(source, timeout=1, phrase_time_limit=10)
-                    
-                    self.send_data({"type": "audio_level", "level": 0.8})
                     
                     text = self.recognizer.recognize_google(audio, language=self.language)
                     
@@ -54,10 +50,8 @@ class VoiceEngine:
                         self.type_text(text)
                         
             except sr.WaitTimeoutError:
-                self.send_data({"type": "audio_level", "level": 0.1})
                 continue
             except sr.UnknownValueError:
-                self.send_data({"type": "audio_level", "level": 0.1})
                 continue
             except sr.RequestError as e:
                 self.send_data({"type": "error", "message": f"API Unavailable: {e}"})
