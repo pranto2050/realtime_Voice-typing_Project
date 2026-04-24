@@ -1,0 +1,26 @@
+appId: com.pranto.voicetypepro
+productName: VoiceType Pro
+directories:
+  output: dist
+  buildResources: build
+files:
+  - package.json
+  - main.js
+  - preload.js
+  - renderer/**/*
+  - python/**/*
+  - assets/**/*
+  - node_modules/**/*
+mac:
+  target: dmg
+  icon: assets/icon.png
+  hardenedRuntime: true
+  entitlements: build/entitlements.mac.plist
+  extendInfo:
+    NSMicrophoneUsageDescription: "VoiceType Pro needs microphone access to convert your speech to text."
+win:
+  target: nsis
+  icon: assets/icon.png
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
